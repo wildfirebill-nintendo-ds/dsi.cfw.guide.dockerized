@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log*
+.git
+.github
+.gitignore
+.gitmodules
+docs/.vitepress/cache
+docs/.vitepress/dist
+crowdin-pull.sh
+crowdin.yaml
+LICENSE
+README.md
