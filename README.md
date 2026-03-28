@@ -56,8 +56,8 @@ docker compose down
 The image is automatically published to GHCR on every push to `master` and on tagged releases.
 
 ```bash
-docker pull ghcr.io/cfw-guide/dsi.cfw.guide:latest
-docker run -p 8080:80 ghcr.io/cfw-guide/dsi.cfw.guide:latest
+docker pull ghcr.io/wildfirebill-nintendo-ds/dsi.cfw.guide:latest
+docker run -p 8080:80 ghcr.io/wildfirebill-nintendo-ds/dsi.cfw.guide:latest
 ```
 
 Available tags:
