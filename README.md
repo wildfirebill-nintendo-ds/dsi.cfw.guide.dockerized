@@ -1,23 +1,7 @@
-## dsi.cfw.guide
+## dsi.cfw.guide dockerized
 The complete guide to modding your Nintendo DSi.
 
-https://dsi.cfw.guide
 
-## Running the site locally
-
-This requires the following installed to your system:
-- node.js, v20 or later
-- its respective npm
-
-To test the website locally, simply run the following commands:
-```
-npm install
-```
-to install all packages required by the website (VitePress and plugins), then
-```
-npm run docs:dev
-```
-to build the Markdown files into HTML and start a testing webserver on http://127.0.0.1:5173.
 
 # Docker
 
@@ -97,6 +81,26 @@ The `docker-publish.yml` workflow automatically:
 ### Required Permissions
 
 The workflow uses the default `GITHUB_TOKEN` with `packages: write` permission to push to GHCR. No additional secrets are required.
+
+https://dsi.cfw.guide
+
+## Running the site locally
+
+This requires the following installed to your system:
+- node.js, v20 or later
+- its respective npm
+
+To test the website locally, simply run the following commands:
+```
+npm install
+```
+to install all packages required by the website (VitePress and plugins), then
+```
+npm run docs:dev
+```
+to build the Markdown files into HTML and start a testing webserver on http://127.0.0.1:5173.
+
+
 
 ## Translating
 
