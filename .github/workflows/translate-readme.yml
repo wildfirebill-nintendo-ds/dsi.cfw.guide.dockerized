@@ -1,0 +1,60 @@
+name: Translate README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'README.md'
+  workflow_dispatch:
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Read README
+        id: readme
+        run: |
+          content=$(cat README.md)
+          content="${content//$'\\'/'\\\\'}"
+          content="${content//\"/\\\"}"
+          content="${content//$'\n'/\\n}"
+          echo "readme_content=$content" >> $GITHUB_OUTPUT
+
+      - name: Translate to each language
+        env:
+          API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
+        run: |
+          languages=(es fr de it pt ru ja zh ko ar)
+          for lang in "${languages[@]}"; do
+            response=$(curl -s -X POST \
+              "https://translation.googleapis.com/language/translate/v2?key=$API_KEY" \
+              -H "Content-Type: application/json" \
+              -d "{\"q\":\"$readme_content\",\"target\":\"$lang\",\"source\":\"en\",\"format\":\"text\"}")
+            translated=$(echo "$response" | jq -r '.data.translations[0].translatedText')
+            mkdir -p translations
+            echo "$translated" > "translations/README.$lang.md"
+          done
+
+      - name: Commit translations
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Translate README to top 10 languages
+          file_pattern: translations/README.*.md

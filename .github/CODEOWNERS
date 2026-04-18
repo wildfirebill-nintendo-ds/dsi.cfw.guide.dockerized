@@ -1,0 +1,6 @@
+# Default reviewers
+* @wildfirebill
+
+# Code owners for specific paths
+# /src/ @another-reviewer
+# /docs/ @docs-team

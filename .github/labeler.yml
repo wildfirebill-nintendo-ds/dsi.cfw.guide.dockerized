@@ -1,0 +1,31 @@
+version: 2
+
+aliases:
+  dependencies:
+    - any: ['dependabot/**', 'package*.json', 'package-lock.json', 'yarn.lock', 'Gemfile', 'Gemfile.lock', 'requirements.txt', 'Cargo.toml', 'Cargo.lock', 'go.sum']
+  docker:
+    - any: ['Dockerfile', 'docker-compose*.yml', '.dockerignore']
+  ci:
+    - any: ['.github/workflows/**', '.gitlab-ci.yml', 'tox.ini', 'Makefile']
+  docs:
+    - any: ['*.md', 'docs/**', 'doc/**']
+  security:
+    - any: ['*security*', '.snyk', '*.secignore']
+
+labelConfigurations:
+  dependencies:
+    - dependencies
+  docker:
+    - docker
+  ci:
+    - ci
+  documentation:
+    - docs
+  security:
+    - security
+  bug:
+    - any: ['**/fix/**', '**/bug/**', '**/patch/**']
+  enhancement:
+    - any: ['**/feat/**', '**/feature/**', '**/enhancement/**']
+  breaking:
+    - any: ['BREAKING*', '**/breaking/**']
