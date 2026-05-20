@@ -7,10 +7,9 @@ concurrency:
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - .github/workflows/docs.yml
-      - dockerfiles/docs.Dockerfile
       - Dockerfile
       - docs/**
   workflow_dispatch:
@@ -24,6 +23,11 @@ jobs:
       contents: read
     # Build the site and upload artifacts using actions/upload-pages-artifact
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
