@@ -94,7 +94,7 @@ target "image-all" {
 }
 
 target "_common_docs" {
-  dockerfile = "./dockerfiles/docs.Dockerfile"
+  dockerfile = "./Dockerfile"
 }
 
 target "docs-export" {
